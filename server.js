@@ -20,7 +20,7 @@ app.use(express.static("public"));
 
 // connect to database
 mongoose.connect(
-  process.env.MONGODB_URI || 'mongodb://localhost/budget',
+  process.env.MONGODB_URI || 'mongodb://localhost/progressive-budget',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

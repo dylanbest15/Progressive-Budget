@@ -47,15 +47,16 @@ self.addEventListener("activate", function (evt) {
 });
 
 // fetch
-self.addEventListener("fetch", function (evt) {
-  if (evt.request.url.includes("/api/")) {
+self.addEventListener("fetch", function(evt) {
+  const {url} = evt.request;
+  if (url.includes("/all") || url.includes("/find")) {
     evt.respondWith(
       caches.open(DATA_CACHE_NAME).then(cache => {
         return fetch(evt.request)
           .then(response => {
             // If the response was good, clone it and store it in the cache.
             if (response.status === 200) {
-              cache.put(evt.request.url, response.clone());
+              cache.put(evt.request, response.clone());
             }
 
             return response;
@@ -66,15 +67,14 @@ self.addEventListener("fetch", function (evt) {
           });
       }).catch(err => console.log(err))
     );
-
-    return;
+  } else {
+    // respond from static cache, request is not for /api/*
+    evt.respondWith(
+      caches.open(CACHE_NAME).then(cache => {
+        return cache.match(evt.request).then(response => {
+          return response || fetch(evt.request);
+        });
+      })
+    );
   }
-
-  evt.respondWith(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.match(evt.request).then(response => {
-        return response || fetch(evt.request);
-      });
-    })
-  );
 });

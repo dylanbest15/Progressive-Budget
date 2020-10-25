@@ -1,5 +1,5 @@
 # Progressive-Budget
-This app utilizes an Express server with a MongoDB database to allow the user to track their budget. They can add or subtract funds from their budget and a graph will autoatically update to show their transactions over time. In addition, this app utilizes a manifest.webmanifest, serviceworker.js, and an IndexedDB in order to completely function in an offline environment as a Progressive Web App. When offline, the user's transactions will be stored in the IndexedDB and the MongoDB will be automatically updated once the user returns online.
+This app utilizes an Express server with a MongoDB database to allow the user to track their budget. They can add or subtract funds from their budget and a graph will automatically update to show their transactions over time. In addition, this app utilizes a manifest.webmanifest, serviceworker.js, and an IndexedDB in order to completely function in an offline environment as a Progressive Web App. When offline, the user's transactions will be stored in the IndexedDB and the MongoDB will be automatically updated once the user returns online.
 
 ## Built With
 - <a href="https://www.npmjs.com/package/express">Express NPM</a>
